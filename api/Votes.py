@@ -8,7 +8,6 @@ TIME_TO_UPDATE_CACHE = 1  # in days.
 
 
 def handle_voting(username, entryID, is_upvote):
-    resresh_most_upvoted_cache()
     current_status = get_vote(username, entryID)
     if current_status is None:
         error = add_vote(username, entryID, bool_to_int(is_upvote))
@@ -52,13 +51,16 @@ def update_most_upvoted_cache(entry_id, is_upvote):
     #if it did, we delete that post and add the new one instead.
     print (new_in_cache)
     if new_in_cache['upvotes'] - new_in_cache['downvotes'] < old_in_cache['upvotes'] - old_in_cache['downvotes']:
-        print ("no need for an update")
+        print("no need for an update")
         return
 
     add_to_most_voted_cache(new_in_cache, old_in_cache)
 
 
-def resresh_most_upvoted_cache():
+def resresh_most_upvoted_cache(db_path = ''):
     """Refresh the most voted cache. should happen once a day or so, to make sure all posts are not too old to apear in the cache."""
+    print("refreshing cache...")
+    if db_path != '':
+        g.db = sqlite3.connect(db_path)  # when this runs on schedule (and not on request), it sets up its own db connection.
     table = get_most_voted_from_table(NUMBER_OF_TOP_VOTES_TO_TRACK, MAXIMUM_POST_AGE_IN_TABLE)
     refresh_to_most_voted_cache(table)

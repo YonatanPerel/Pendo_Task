@@ -3,7 +3,7 @@
 import sqlite3
 import datetime
 from flask import session, g
-from .utils import sql_row_to_dict, calculate_date_from_age
+from .utils import sql_row_to_dict
 
 
 def search_entry(id):
@@ -157,10 +157,9 @@ def search_most_voted_cache(id):
 
 
 def get_most_voted_from_table(number_of_records, maximum_age):
-    age_date = calculate_date_from_age(maximum_age)
     query = '''SELECT * FROM posts WHERE datetime('now') - datetime(creation_date) <= :maximum_age 
         ORDER BY upvotes - downvotes DESC LIMIT :number'''
-    parameters = {'number': number_of_records, 'maximum_age': maximum_age}  # ToDo: log by date!
+    parameters = {'number': number_of_records, 'maximum_age': maximum_age}
     c = g.db.execute(query, parameters)
     posts = {}
     counter = 0

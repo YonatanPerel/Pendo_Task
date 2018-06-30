@@ -16,9 +16,9 @@ api = Api(app, errors = errors)
 @app.before_request
 def before_request():
     g.db = sqlite3.connect(app.config['DATABASE_NAME'])
-    if 'logged_in' not in session.keys():
+    if 'logged_in' not in session:
         session['isLoggedin'] = False
-    if 'username' not in session.keys():
+    if 'username' not in session:
         session['username'] = ''
 
 

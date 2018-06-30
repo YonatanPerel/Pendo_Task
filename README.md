@@ -2,7 +2,7 @@
 
 instractions:
 
-run with a virtual env, with requierments installed.
+run on a virtual env, with requierments.txt installed.
 
 	create user:
 		POST {'username': username,
@@ -24,9 +24,9 @@ run with a virtual env, with requierments installed.
 	
 
 	update blog post:
-		POST {'content': content OR 'upvote' true/false} + HTTP basic authentication details.
+		POST {'content': content OR 'upvote': true/false} + HTTP basic authentication details.
 		to: /entry/post_id
-		this is used for both updating the content of the post, and up/downvoting it.
+		this is used for both updating the content of the post, and up/downvoting it, and therefore only needs one of the parameters.
 	
 	
 	Delete blog post:
