@@ -17,6 +17,8 @@ run on a virtual env, with requierments.txt installed.
 	
 	get most upvoted list:
 		GET /entry
+		this gives you the list from the most voted cache table witout accessing the main posts table.
+		the cache is updated on a schedual to keep up to date, and with every upvote(if necessery)
 	
 
 	get a blog post:

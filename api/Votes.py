@@ -33,7 +33,7 @@ def handle_voting(username, entryID, is_upvote):
 
 
 def update_most_upvoted_cache(entry_id, is_upvote):
-    """update the most voted table. the value of the upvotes per post is its upvotes minus its downvotes. this should run every minitue or so.."""
+    """update the most voted table. the value of the upvotes per post is its upvotes minus its downvotes."""
     new_in_cache = search_entry(entry_id)
     # if the post exist in cache, we only need to update the amount of upvotes it has.
     if search_most_voted_cache(entry_id):
